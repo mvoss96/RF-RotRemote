@@ -22,3 +22,5 @@
 #define DOUBLE_CLICK_MS                           200
 #define SLEEP_AFTER_MS                           1500
 #define CLICKS_PER_STEP                             4
+
+extern unsigned long globalTimer;
