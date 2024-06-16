@@ -19,6 +19,7 @@ void checkForSleep()
         LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
 
         Serial.println(F("woken up!"));
+        radioWake();
         globalTimer = millis();
         sleeping = false;
     }

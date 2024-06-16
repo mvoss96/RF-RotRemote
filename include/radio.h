@@ -4,3 +4,4 @@
 void radioInit();
 void radioSleep();
 void radioSend();
+void radioWake();

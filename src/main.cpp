@@ -44,6 +44,6 @@ void setup()
 
 void loop()
 {
-  //checkForSleep();
+  checkForSleep();
   encoderRead();
 }

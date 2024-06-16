@@ -8,7 +8,7 @@ static RF24 radio(PIN_RADIO_CE, PIN_RADIO_CSN);
 static bool radioInitialized = false;
 static bool _radioInterruptReceived = false;
 static const auto RADIO_DATARATE = RF24_250KBPS;
-uint8_t radioAddress[5] = {0x99,0x6C,0xCA,0x80,0x01};
+uint8_t radioAddress[5] = {0x99, 0x6C, 0xCA, 0x80, 0x01};
 char dataToSend[10] = "Hello";
 
 void radioInit()
@@ -62,4 +62,9 @@ void radioSend()
         Serial.print(" -> Acknowledgment not received");
     }
     Serial.println();
+}
+
+void radioWake()
+{
+    radio.powerUp();
 }
