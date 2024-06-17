@@ -4,10 +4,12 @@
 #include "encoder.h"
 #include "config.h"
 #include "radio.h"
+#include "radioMessage.h"
 
 static volatile bool btnPressed = false;
 static NewEncoder encoder(2, 3, -20, 20, 0, FULL_PULSE);
 static bool wasRotated = false;
+uint8_t dataToSend[10] = "Hello";
 
 ISR(PCINT2_vect)
 {
@@ -29,36 +31,36 @@ void encoderSetup()
 
 static void rotLeft()
 {
-    Serial.print(F("left "));
+    Serial.println(F("left "));
     wasRotated = true;
     globalTimer = millis();
     bool pressed = !digitalRead(PIN_BTN_ENC);
-    Serial.println(pressed);
-    radioSend();
+    RemoteRadioMessage message(pressed ? RemoteEvents::DOWN1 : RemoteEvents::DOWN2);
+    radioSendMessage(message);
 }
 
 static void rotRight()
 {
-    Serial.print(F("right "));
+    Serial.println(F("right "));
     wasRotated = true;
     globalTimer = millis();
     bool pressed = !digitalRead(PIN_BTN_ENC);
-    Serial.println(pressed);
-    radioSend();
+    RemoteRadioMessage message(pressed ? RemoteEvents::UP1 : RemoteEvents::UP2);
+    radioSendMessage(message);
 }
 
 static void rotClick()
 {
     Serial.println(F("click "));
     globalTimer = millis();
-    radioSend();
+    RemoteRadioMessage message(RemoteEvents::TOGGLE);
+    radioSendMessage(message);
 }
 
 static void rotDoubleClick()
 {
-    Serial.println(F("doubleclick "));
+    Serial.println(F("doubleClick "));
     globalTimer = millis();
-    radioSend();
 }
 
 static void btnRead()

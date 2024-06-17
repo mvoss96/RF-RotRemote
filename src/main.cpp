@@ -20,8 +20,8 @@ void setPinModes()
   pinMode(PIN_BTN_LISTEN, INPUT_PULLUP);
 
   // Enable interrupt on PIN_BTN1 (4)
-  PCICR |= 0b00000100;    // turn on port D
-  PCMSK2 |= 0b00010000;   // turn on pin 4
+  PCICR |= 0b00000100;  // turn on port D
+  PCMSK2 |= 0b00010000; // turn on pin 4
 }
 
 void setup()
