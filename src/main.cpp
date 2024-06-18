@@ -28,6 +28,7 @@ void printGreeting()
 {
   uint8_t uuid[] = DEVICE_UUID;
   Serial.printf("%s %02X:%02X:%02X:%02X\n", DEVICE_NAME, uuid[0], uuid[1], uuid[2], uuid[3]);
+  updateVcc();
   printPowerStatus();
 }
 

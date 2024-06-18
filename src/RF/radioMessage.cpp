@@ -80,13 +80,8 @@ void RadioMessage::calculateChecksum()
 RemoteRadioMessage::RemoteRadioMessage(RemoteEvents event)
 {
     MSG_TYPE = (uint8_t)MessageTypes::REMOTE;
-    BATTERY_VOLTAGE_MV = readVcc();
+    BATTERY_VOLTAGE_MV = getBatteryVoltage();
     BATTERY_PERCENTAGE = getBatteryLevel();
-    Serial.print("Battery voltage: ");
-    Serial.print(BATTERY_VOLTAGE_MV);
-    Serial.print("mV ");
-    Serial.print((BATTERY_PERCENTAGE * 100) / 255);
-    Serial.println("%");
     uint8_t data[4] = {(uint8_t)event, BATTERY_PERCENTAGE, (uint8_t)(BATTERY_VOLTAGE_MV & 0xFF), (uint8_t)((BATTERY_VOLTAGE_MV >> 8) & 0xFF)};
     create(data, sizeof(data));
 }

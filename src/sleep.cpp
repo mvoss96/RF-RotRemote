@@ -3,6 +3,7 @@
 #include "sleep.h"
 #include "config.h"
 #include "RF/radio.h"
+#include "RF/power.h"
 
 bool sleeping = false;
 
@@ -19,6 +20,7 @@ void checkForSleep()
         LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
 
         Serial.println(F("woken up!"));
+        updateVcc();
         radioWake();
         globalTimer = millis();
         sleeping = false;

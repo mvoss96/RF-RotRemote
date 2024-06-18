@@ -91,6 +91,13 @@ bool radioSend(uint8_t *dataToSend, size_t size)
     else
     {
         Serial.println("-> Failed");
+        if (LED_BLINK_ON_MESSAGE)
+        {
+            digitalWrite(PIN_LED2, LOW);
+            delay(100);
+            digitalWrite(PIN_LED2, HIGH);
+        
+        }
     }
     if (LED_BLINK_ON_MESSAGE)
     {
