@@ -3,8 +3,7 @@
 
 #include "encoder.h"
 #include "config.h"
-#include "radio.h"
-#include "radioMessage.h"
+#include "RF/radio.h"
 
 static volatile bool btnPressed = false;
 static NewEncoder encoder(2, 3, -20, 20, 0, FULL_PULSE);

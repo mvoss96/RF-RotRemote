@@ -2,7 +2,7 @@
 #include <LowPower.h>
 #include "sleep.h"
 #include "config.h"
-#include "radio.h"
+#include "RF/radio.h"
 
 bool sleeping = false;
 

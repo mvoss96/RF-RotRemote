@@ -1,10 +1,10 @@
 #include <Arduino.h>
 
-#include "power.h"
 #include "encoder.h"
 #include "sleep.h"
 #include "config.h"
-#include "radio.h"
+#include "RF/power.h"
+#include "RF/radio.h"
 
 unsigned long globalTimer;
 
@@ -24,11 +24,19 @@ void setPinModes()
   PCMSK2 |= 0b00010000; // turn on pin 4
 }
 
+void printGreeting()
+{
+  uint8_t uuid[] = DEVICE_UUID;
+  Serial.printf("%s %02X:%02X:%02X:%02X\n", DEVICE_NAME, uuid[0], uuid[1], uuid[2], uuid[3]);
+  printPowerStatus();
+}
+
 void setup()
 {
-  Serial.begin(115200);
   setPinModes();
-  printPowerStatus();
+  Serial.begin(115200);
+  delay(100);
+  printGreeting();
   encoderSetup();
   radioInit();
 
