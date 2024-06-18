@@ -1,4 +1,5 @@
 #include "radioMessage.h"
+#include "power.h"
 
 static uint8_t msgNum = 0;
 
@@ -30,7 +31,7 @@ void RadioMessage::print()
 
 size_t RadioMessage::getSize()
 {
-    return sizeof(PROTOCOL_VERSION) + sizeof(UUID) + sizeof(MSG_NUM) + sizeof(MSG_TYPE) + dataSize;
+    return sizeof(PROTOCOL_VERSION) + sizeof(UUID) + sizeof(MSG_NUM) + sizeof(MSG_TYPE) + dataSize + 2;
 }
 
 bool RadioMessage::getCreated()
@@ -79,5 +80,13 @@ void RadioMessage::calculateChecksum()
 RemoteRadioMessage::RemoteRadioMessage(RemoteEvents event)
 {
     MSG_TYPE = (uint8_t)MessageTypes::REMOTE;
-    create((uint8_t *)&event, 1);
+    BATTERY_VOLTAGE_MV = readVcc();
+    BATTERY_PERCENTAGE = getBatteryLevel();
+    Serial.print("Battery voltage: ");
+    Serial.print(BATTERY_VOLTAGE_MV);
+    Serial.print("mV ");
+    Serial.print((BATTERY_PERCENTAGE * 100) / 255);
+    Serial.println("%");
+    uint8_t data[4] = {(uint8_t)event, BATTERY_PERCENTAGE, (uint8_t)(BATTERY_VOLTAGE_MV & 0xFF), (uint8_t)((BATTERY_VOLTAGE_MV >> 8) & 0xFF)};
+    create(data, sizeof(data));
 }

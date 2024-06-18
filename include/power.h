@@ -5,9 +5,9 @@
 #if defined __AVR__ 
 
 // Function to read the supply voltage using the internal 1.1V reference
-inline long readVcc()
+inline uint16_t readVcc()
 {
-  long result; // Variable to hold the result
+  uint16_t result; // Variable to hold the result
 
   // Configure the ADC to do a conversion with AVcc as the reference, and the internal 1.1V voltage reference as the input.
   // _BV(REFS0) sets the reference voltage to AVcc.
@@ -40,7 +40,7 @@ inline long readVcc()
 }
 
 // Function to map the battery voltage to a battery level (1 to 255)
-inline uint8_t batteryLevel()
+inline uint8_t getBatteryLevel()
 {
   // Ensure that the voltage is within the range from emptyVoltage to fullVoltage
   long voltage = constrain(readVcc(), BATTERY_EMPTY_VOLTAGE, BATTERY_FULL_VOLTAGE);
@@ -57,7 +57,7 @@ inline void printPowerStatus()
   Serial.print("VCC: ");
   Serial.print(readVcc());
   Serial.print("mV ");
-  Serial.print(round((batteryLevel() / 255.0) * 100));
+  Serial.print(round((getBatteryLevel() / 255.0) * 100));
   Serial.println("%");
 }
 
