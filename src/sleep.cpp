@@ -13,7 +13,6 @@ void checkForSleep()
     {
         sleeping = true;
         Serial.println(F("sleep"));
-        //sendStatus();
         delay(10);
         radioSleep();
         Serial.flush();

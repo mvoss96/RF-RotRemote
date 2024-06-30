@@ -7,8 +7,8 @@
 #define LED_BLINK_ON_MESSAGE                        1           // Blink LEDs on messages
 #define RADIO_CHANNEL                             100           // Radio channel   0-125
 #define DEVICE_NAME                     "RF-RotRemote"          // Device name
-#define WRITE_ADDRESS   {0x99, 0x6C, 0xCA, 0x80, 0x01}          // Radio address (5 bytes)
-#define DEVICE_UUID                 {'M', 'V', 'R', 1}          // Device UUID  (4 bytes)
+#define WRITE_ADDRESS   {0x46, 0x36, 0x31, 0x38, 0x00}          // Radio address (5 bytes)
+#define DEVICE_UUID                 {'M', 'V', 'R', 2}          // Device UUID  (4 bytes)
 
 // Pin definitions
 #define PIN_RADIO_CE                                9       

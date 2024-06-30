@@ -33,7 +33,7 @@ static void rotLeft()
     Serial.println(F("left "));
     wasRotated = true;
     globalTimer = millis();
-    bool pressed = !digitalRead(PIN_BTN_ENC);
+    bool pressed = digitalRead(PIN_BTN_ENC);
     RemoteRadioMessage message(pressed ? RemoteEvents::DOWN1 : RemoteEvents::DOWN2);
     radioSendMessage(message);
 }
@@ -43,7 +43,7 @@ static void rotRight()
     Serial.println(F("right "));
     wasRotated = true;
     globalTimer = millis();
-    bool pressed = !digitalRead(PIN_BTN_ENC);
+    bool pressed = digitalRead(PIN_BTN_ENC);
     RemoteRadioMessage message(pressed ? RemoteEvents::UP1 : RemoteEvents::UP2);
     radioSendMessage(message);
 }
@@ -60,6 +60,8 @@ static void rotDoubleClick()
 {
     Serial.println(F("doubleClick "));
     globalTimer = millis();
+    RemoteRadioMessage message(RemoteEvents::SCENE1);
+    radioSendMessage(message);
 }
 
 static void btnRead()

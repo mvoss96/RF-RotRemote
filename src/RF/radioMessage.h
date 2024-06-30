@@ -18,6 +18,15 @@ enum class RemoteEvents
     DOWN1,
     UP2,
     DOWN2,
+    UP3,
+    DOWN3,
+    UP4,
+    DOWN4,
+    UP5,
+    DOWN5,
+    SCENE1,
+    SCENE2,
+    SCENE3,
 };
 
 class RadioMessage
